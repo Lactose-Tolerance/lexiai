@@ -1,8 +1,6 @@
 marker-pdf
 pydantic
-groq
 ragas
-langchain-groq
 langchain-community
 langgraph
 fastembed

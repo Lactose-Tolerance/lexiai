@@ -5,7 +5,7 @@ from marker.models import create_model_dict
 from marker.output import text_from_rendered
 
 class MarkerIngestion:
-    def _init_(self):
+    def __init__(self):
         print("Loading Marker models (this may take time on first run)...")
         self.converter = PdfConverter(artifact_dict=create_model_dict())
 

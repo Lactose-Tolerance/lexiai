@@ -1,40 +1,36 @@
-# import argparse
-# from src.pipeline import SpanishInquisitionPipeline
-
-# if __name__ == "__main__":
-#     parser = argparse.ArgumentParser(description="AI Oral Examiner Pipeline")
-#     parser.add_argument("pdf_path", type=str, help="Path to the research paper PDF")
-#     args = parser.parse_args()
-
-#     pipeline = SpanishInquisitionPipeline()
-#     pipeline.run(args.pdf_path)
-
-
 import argparse
 import sys
-import subprocess
+import tkinter as tk
 from src.pipeline import SpanishInquisitionPipeline
+from src.gui import LexiCognitionGUI
 
 def run_cli(pdf_path):
     if not pdf_path:
         print("Error: PDF path required for CLI mode.")
+        print("Usage: python main.py <path_to_pdf> --cli")
         return
+    print(f"Launching CLI mode for: {pdf_path}")
     pipeline = SpanishInquisitionPipeline()
     pipeline.run(pdf_path)
 
-def run_ui():
-    print("Launching Streamlit UI...")
-    # Use subprocess to call streamlit run src/ui.py
-    subprocess.run([sys.executable, "-m", "streamlit", "run", "src/ui.py"])
+def run_gui():
+    print("Launching Desktop GUI...")
+    root = tk.Tk()
+    app = LexiCognitionGUI(root)
+    root.mainloop()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AI Oral Examiner Pipeline")
-    parser.add_argument("pdf_path", type=str, nargs="?", help="Path to the research paper PDF (Required for CLI)")
-    parser.add_argument("--ui", action="store_true", help="Launch the Web Interface")
+    
+    # Optional arguments for CLI mode
+    parser.add_argument("pdf_path", type=str, nargs="?", help="Path to the research paper PDF (for CLI mode)")
+    parser.add_argument("--cli", action="store_true", help="Launch the Text-based CLI instead of the GUI")
     
     args = parser.parse_args()
 
-    if args.ui:
-        run_ui()
-    else:
+    # If the user explicitly asks for the CLI or provides a PDF path via command line
+    if args.cli or args.pdf_path:
         run_cli(args.pdf_path)
+    else:
+        # Default behavior: Launch the Tkinter GUI
+        run_gui()
