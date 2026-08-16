@@ -1,11 +1,25 @@
-marker-pdf
-pydantic
-ragas
+# --- Core Frameworks ---
+langchain
 langchain-community
 langgraph
-fastembed
-python-dotenv
-langchain
+
+# --- Google AI Integrations ---
 langchain-google-genai
 google-generativeai
 google-genai
+
+# --- RAG & Vector Store (NEW) ---
+langchain-text-splitters
+faiss-cpu
+fastembed
+
+# --- Evaluation ---
+ragas
+datasets
+
+# --- Document Ingestion ---
+marker-pdf
+
+# --- Utilities ---
+pydantic
+python-dotenv
